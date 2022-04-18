@@ -1,16 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./App.css";
 
-const App = () => {
-  const [cat, setCat] = useState<string>("");
+function App() {
+  const [cat, setCat] = useState("");
 
   const handleClick = async () => {
     try {
       const catRes = await axios.get("https://aws.random.cat/meow");
       setCat(catRes.data.file);
     } catch (error) {
-      console.log("error");
+      // nope
     }
   };
 
@@ -18,14 +18,16 @@ const App = () => {
     <div className="App">
       <div className="container">
         <div className="imageC">
-          <img src={cat} alt="cat"></img>
+          <img src={cat} alt="cat" />
         </div>
         <div className="buttonDiv">
-          <button onClick={handleClick}>{cat ? "New Cat" : "Get Cat"}</button>
+          <button type="button" onClick={handleClick}>
+            {cat ? "Next Cat" : "Get Cat"}
+          </button>
         </div>
       </div>
     </div>
   );
-};
+}
 
 export default App;
